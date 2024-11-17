@@ -1,0 +1,349 @@
+.map-button {
+    background-color: #fff;
+    font-size: 11px;
+    font-weight: bold;
+    color: #000;
+    padding: 7px;
+    margin-top: 12px;
+    border: 1px solid #c0c0c0;
+}
+
+.map-sub-button {
+    background-color: #fff;
+    font-size: 11px !important;
+    font-weight: bold !important;
+    color: #000 !important;
+    padding: 7px;
+    border: 1px solid #c0c0c0;
+}
+
+
+.marker_info .info {
+    width: 300px;
+    height: 320px;
+    border-radius: 5px;
+    background: rgba(0, 127, 237, 0.8);
+    position: relative;
+    z-index: 9999999;
+}
+
+.marker_info .info img {
+    display: block;
+    border-radius: 100px;
+    width: 110px;
+    position: absolute;
+    top: -53px;
+    left: 90px;
+    border: 7px solid #e9e5db;
+    background: #ffffff;
+}
+
+.marker_info .info a {
+    background: #ffffff;
+    border: 0px;
+    color: #218DEA;
+    transition:0.3s;
+}
+
+.marker_info .info a:hover {
+    background: #242A33;
+    border: 0px;
+    color: #218DEA;
+    transition: 0.3s;
+}
+
+.marker_info .info h2 {
+    text-align: center;
+    padding-top: 10px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    color: #ffffff;
+}
+
+.marker_info .info h2 span {
+    width: 70px;
+    height: 1px;
+    background: #FFFFFF;
+    display: block;
+    margin: 15px auto;
+}
+
+.marker_info .info span {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    color: #FFFFFF;
+    line-height: 22px;
+    text-align: center;
+    display: block;
+    padding: 0px 30px;
+    font-size: 14px;
+}
+
+.marker_info .info a {}
+a.green_btn {
+    background: #95c800;
+    border: 1px solid #000000;
+    padding: 10px 50px;
+    color: #ffffff;
+    font-size: 14px;
+    border-radius: 4px;
+    display: block;
+    width: 180px;
+    text-align: center;
+    bottom: 40px;
+    position: absolute;
+    left: 60px;
+    transition: 0.3s;
+}
+
+a.green_btn:hover {
+    background: #ffffff; /* Old browsers */
+    border: 1px solid #000000;
+    padding: 10px 50px;
+    color: #95c800;
+    font-size: 14px;
+    box-shadow: none;
+    border-radius: 4px;
+    display: block;
+    width: 180px;
+    text-align: center;
+    bottom: 40px;
+    position: absolute;
+    left: 60px;
+    text-decoration: none;
+}
+
+.marker_info .arrow {
+    width: 0px;
+    height: 0px;
+    position: absolute;
+    padding: 0px !important;
+    left: -28px;
+    top: 150px !important;
+    border: 14px solid rgba(255, 0, 0, 0);
+    top: 0px;
+    border-right-color: rgba(33, 141, 234, 0.9);
+}
+
+/*header*/
+.header {
+    position: absolute;
+    width: 100%;
+    z-index: 9;
+    transition: 0.3s;
+}
+
+.header:hover {
+    background: rgba(255, 255, 255, 0.42);
+    transition: 0.3s;
+}
+
+.open_side {
+    float: left;
+    font-size: 21px;
+    padding: 28px 10px 0px 20px;
+    transition:0.3s;
+}
+
+.open_side:hover {
+    float: left;
+    font-size: 21px;
+    color: #03AAAC;
+    padding: 28px 10px 0px 20px;
+    cursor: pointer;
+    transition:0.3s;
+}
+
+.header .logo {
+    display: block;
+    float: left;
+    padding: 30px 30px 0px 20px;
+}
+
+.header .weather {}
+.header .weather i {
+    font-size: 33px;
+    padding: 24px 0px;
+    display: block;
+    float: left;
+}
+
+.header .weather span {
+    font-size: 36px;
+    font-weight: 300;
+    float: left;
+    display: block;
+    margin: 18px 10px;
+}
+
+.header .search {
+    margin: 27px 30px;
+    float: right;
+    background: #ffffff;
+    box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    border-radius: 3px;
+    height: 33px;
+    font-size: 13px;
+    font-style: italic;
+    width: 100%;
+    padding: 0px 10px;
+    max-width: 400px;
+}
+
+.green_btn_header {
+    background: #218dea;
+    padding: 6px 50px;
+    color: #ffffff;
+    font-size: 14px;
+    border-radius: 4px;
+    display: block;
+    width: 180px;
+    text-align: center;
+    float: right;
+    margin: 28px;
+    transition: 0.3s;
+}
+
+.green_btn_header:hover {
+    background: #353535; /* Old browsers */
+    padding: 6px 50px;
+    color: #ffffff;
+    font-size: 14px;
+    border-radius: 4px;
+    display: block;
+    width: 180px;
+    text-align: center;
+    float: right;
+    margin: 28px;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+/*add place*/
+.add_place {
+    position: fixed;
+    z-index: 999;
+    background: rgba(0, 0, 0, 0.83);
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    transition: 0.3s linear;
+}
+
+.place_form {
+    width: 300px;
+    background: #ffffff;
+    border-radius: 4px;
+    margin: 0 auto;
+    top: 50%;
+    position: relative;
+    height: 480px;
+    margin-top: -265px;
+}
+
+.place_form h3 {
+    font-weight: 300;
+    text-align: center;
+    padding: 20px 0px;
+    display: block;
+}
+
+.place_form h3 span {
+    display: block;
+    width: 60px;
+    height: 1px;
+    background: #95C800;
+    margin: 20px auto -16px auto;
+}
+
+.place_form label {
+    font-size: 11px;
+    text-transform: uppercase;
+    display: block;
+    padding: 0px 30px;
+    margin: 20px 0px 20px 0px;
+}
+
+.place_form label input {
+    display: block;
+    width: 100%;
+    height: 40px;
+    border-radius: 3px;
+    border: 1px solid #DDDDDD;
+    margin-top: 10px;
+    background: #F9F9F9;
+    padding: 0px 20px;
+    font-size: 16px;
+    font-weight: 300;
+}
+
+.place_form label input:focus {
+    outline: none;
+    border: 1px solid #7CCB18;
+    background: #ffffff;
+    color: #7ccb18;
+    font-size: 16px;
+    font-weight: 300;
+}
+
+.place_form label select {
+    display: block;
+    width: 100%;
+    margin-top: 10px;
+    height: 30px;
+}
+
+.place_form a {
+    width: 100%;
+    margin: 0px;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+    padding: 20px;
+    margin-top: 18px;
+}
+
+.place_form a:hover {
+    width: 100%;
+    margin: 0px;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+    padding: 20px;
+    margin-top: 18px;
+}
+
+/*login form*/
+    .login_form {height: 400px;}
+    .login_form a i {
+    padding: 0px 10px 0px 0px;
+}
+
+.login_form a, .login_form a:hover {
+    margin: 10px 30px;
+    width: 240px;
+    border-radius: 3px;
+    padding: 10px;
+}
+
+.none {top: -150%; transition: 0.3s linear;}
+.close_window {
+    display: block;
+    position: absolute;
+    top: -20px;
+    right: -20px;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.close_window:hover {
+    color: #E51616;
+}
+
+.close_info {
+    color: #fff !important;
+    font-size: 14px !important;
+    background-color: inherit !important;
+    padding: 5px 5px;
+}
+
+/*Adaptive map page*/

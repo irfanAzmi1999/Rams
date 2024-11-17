@@ -1,0 +1,67 @@
+##Dockerfile
+
+FROM php:8.3-fpm
+
+# Add files or directories from link to the Docker image.
+ADD https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions /usr/local/bin/
+
+# Install php extensions
+RUN chmod +x /usr/local/bin/install-php-extensions && sync && \
+    install-php-extensions pdo_pgsql pgsql zip exif pcntl memcached soap
+
+# Install dependencies for ubuntu based system
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    libpng-dev \
+    libjpeg62-turbo-dev \
+    libfreetype6-dev \
+    locales \
+    zip \
+    jpegoptim optipng pngquant gifsicle \
+    unzip \
+    git \
+    curl \
+    lua-zlib-dev \
+    libmemcached-dev \
+    supervisor \
+    nginx
+
+# RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && apt-get -y install nodejs npm
+RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && apt-get install -y nodejs
+
+# Installing composer
+RUN curl -sS https://getcomposer.org/installer -o composer-setup.php
+RUN php composer-setup.php --install-dir=/usr/local/bin --filename=composer
+RUN rm -rf composer-setup.php
+
+# Clear cache
+RUN apt-get clean && rm -rf /var/lib/apt/lists/*
+
+RUN mkdir -p /var/www/html
+
+# Setup Working Dir
+WORKDIR /var/www/html
+
+# Copy code to /var/www/html
+COPY . /var/www/html
+
+RUN chown -R www-data:www-data /var/www/html
+
+RUN rm -rf bootstrap/cache/*.php
+
+# Copy nginx/php/supervisor configs
+RUN cp docker/supervisor.conf /etc/supervisord.conf
+RUN cp docker/php.ini /usr/local/etc/php/conf.d/app.ini
+RUN cp docker/nginx.conf /etc/nginx/sites-enabled/default
+RUN chmod +x /var/www/html/docker/run.sh
+
+# Build css package
+# RUN npm install
+# RUN npm run prod
+
+# Deployment steps
+RUN cp .env.example .env
+RUN composer install --ignore-platform-reqs
+
+EXPOSE 80
+ENTRYPOINT ["/var/www/html/docker/run.sh"]

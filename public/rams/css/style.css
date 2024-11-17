@@ -1,0 +1,115 @@
+/* Zoom 90% */
+
+/*body { */
+    /* -moz-transform: scale(0.9, 0.9); */  /* Moz-browsers */ 
+    /* zoom: 0.9; */  /* Other non-webkit browsers  */
+    /* zoom: 90%; */  /* Webkit browsers  */
+/* } */
+
+/* wrapper { */
+    /*min-height: 1000px; */
+/* } */
+
+/* Parsley */
+
+.parsley-error-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    margin-top: 6px;
+    font-size: 12px;
+    color: #c00 !important;
+}
+.parsley-error {
+    border-color: #ff5f5f !important;
+    /* border: 1px solid #c00 !important; */
+}
+
+textarea {
+    resize: none;
+}
+
+.text-green {
+    color: #3eb493;
+}
+
+.text-blue {
+    color: #3e80c5;
+}
+
+.label-primary2 {
+    background-color: #3e80c5;
+    color: #fff;
+    font-size: 12px !important;
+}
+
+.label-black {
+    background-color: #000000;
+    color: #fff;
+    font-size: 14px !important;
+}
+
+.text-12 {
+    font-size: 12px !important;
+}
+
+.text-14 {
+    font-size: 14px !important;
+}
+
+.text-16 {
+    font-size: 16px !important;
+}
+
+.text-30 {
+    font-size: 30px !important;
+}
+
+.img-rams {
+    border: 1px solid #dcdcdc;
+    padding: 5px;
+}
+/*Panel Maut dashboard*/
+.wrapper-panel{
+    padding: 0 10px;
+}
+.panel-maut{
+    position:relative;
+    height: 320px;
+    max-height: 273px;
+    overflow: hidden;
+}
+.maut-text{
+    font-size: 120px;
+}
+
+
+/*end panel maut*/
+.text-outline {
+   -webkit-text-stroke-width: 1px;
+   -webkit-text-stroke-color: black;
+}
+
+.vertical-text {
+    transform: rotate(90deg);
+    transform-origin: left top 0;
+    font-weight: bold;
+}
+
+th.rotate > div {
+  transform: 
+    /* Magic Numbers */
+    /* translate(25px, 51px) */
+    translate(0px, 57px)
+    /* 45 is really 360 - 45 */
+    rotate(270deg);
+  width: 30px;
+}
+
+.clear {
+  display: block;
+  overflow: hidden;
+}
+.table-list-kenderaan-style{
+    width: 900px;
+}

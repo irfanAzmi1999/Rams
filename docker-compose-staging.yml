@@ -1,0 +1,38 @@
+version: '3.3'
+
+services:
+  staging-component:
+    build:
+      context: .
+      dockerfile: Dockerfile-staging
+    image: ${DC_IMAGE_NAME}:${DC_IMAGE_TAG}
+    container_name: ${DC_CONTAINER_NAME}
+    ports:
+      - ${DC_APP_PORT}:80
+    volumes:
+      - laravel-log:/var/www/storage/logs
+      - services-log:/var/log
+    environment:
+      DB_CONNECTION: pgsql
+      DB_HOST: ${DB_HOST}
+      DB_PORT: ${DB_PORT}
+      DB_DATABASE: ${DB_DATABASE}
+      DB_USERNAME: ${DB_USERNAME}
+      DB_PASSWORD: ${DB_PASSWORD}
+      MAIL_HOST: ${MAIL_HOST}
+      MAIL_PORT: ${MAIL_PORT}
+      MAIL_USERNAME: ${MAIL_USERNAME}
+      MAIL_PASSWORD: ${MAIL_PASSWORD}
+      APP_KEY: ${APP_KEY}
+      # APM_APPNAME: ${APM_APPNAME}
+      # APM_APPVERSION: ${APM_APPVERSION}
+      # APM_SERVERURL: ${APM_SERVERURL}
+      # APM_SECRETTOKEN: ${APM_SECRETTOKEN}
+    extra_hosts:
+      - "10.9.206.193:10.9.206.63"
+
+volumes:
+  laravel-log:
+    driver: local
+  services-log:
+    driver: local

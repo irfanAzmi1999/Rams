@@ -1,0 +1,95 @@
+workflow:
+  rules:
+    - if: $CI_COMMIT_BRANCH != "staging_component" && $CI_COMMIT_BRANCH != "staging" && $CI_COMMIT_BRANCH != "training" && $CI_COMMIT_BRANCH != "production" && $CI_PIPELINE_SOURCE != "merge_request_event"
+      when: never
+    - when: always
+
+variables:
+    IMAGE_NAME: "kkr.gov.my/rams-v2/web"
+    IMAGE_PORT: 8085
+    VERSION: "2.0-beta"
+    CONTAINER_NAME: "kkr-rams-v2-web"
+    STAGING_SERVER_URL: "http://10.9.206.193:"
+                                                                         
+stages:
+    - test
+    - build
+    - deploy
+
+#Build Docker Image
+build_image:
+    stage: build
+    tags:
+        - ep
+        - shell
+    script:
+        - docker build -f Dockerfile-staging -t $IMAGE_NAME:$VERSION.$CI_PIPELINE_IID .
+    # artifacts:
+    #     paths:
+    #     - version-file.txt
+    only:
+        - staging
+
+#Push Docker Image into Harbor Registry 
+# push_image:
+#     stage: build
+#     needs: 
+#         - build_image
+#     tags:
+#         - RHEL
+#         - staging
+#     script:
+#         - docker login https://hub.osdec.gov.my -u $HARBOR_USER -p $HARBOR_TOKEN
+#         - docker push $IMAGE_NAME:$VERSION.$CI_PIPELINE_IID
+#     only:
+#         - staging
+
+#Deploy into Staging Env
+deploy_staging:
+    stage: deploy
+    only: 
+        - staging
+    tags:
+        - ep
+        - shell
+    before_script:
+        - "export DC_CONTAINER_NAME=$CONTAINER_NAME &&
+            export DC_IMAGE_NAME=$IMAGE_NAME &&
+            export DC_IMAGE_TAG=$VERSION.$CI_PIPELINE_IID &&
+            export DC_APP_PORT=$IMAGE_PORT"
+        - "export DB_HOST=$STAGING_DB_HOST &&
+            export DB_DATABASE=$STAGING_DB_DATABASE &&
+            export DB_PORT=$STAGING_DB_PORT &&
+            export DB_USERNAME=$STAGING_DB_USERNAME &&
+            export DB_PASSWORD=$STAGING_DB_PASSWORD"
+        - "export MAIL_HOST=$STAGING_MAIL_HOST &&
+            export MAIL_PORT=$STAGING_MAIL_PORT &&
+            export MAIL_USERNAME=$STAGING_MAIL_USERNAME &&
+            export MAIL_PASSWORD=$STAGING_MAIL_PASSWORD"
+        - "export APP_KEY=$STAGING_APP_KEY &&
+            export APP_URL=$STAGING_SERVER_URL.$IMAGE_PORT" # &&
+            # export APM_APPNAME=$ELASTIC_APPNAME &&
+            # export APM_APPVERSION=$ELASTIC_APPVERSION &&
+            # export APM_SECRETTOKEN=$ELASTIC_SECRETTOKEN &&
+            # export APM_SERVERURL=$ELASTIC_SERVERURL"
+        # - docker login https://hub.osdec.gov.my -u $HARBOR_USER -p $HARBOR_TOKEN
+    script:
+        - docker-compose -f docker-compose-staging.yml down
+        - docker-compose -f docker-compose-staging.yml up -d
+    environment:
+        name: staging
+        url: $STAGING_SERVER_URL.$IMAGE_PORT
+        
+change_storage_permission:
+    stage: deploy
+    needs:
+        - deploy_staging
+    only: 
+        - staging
+    tags:
+        - ep
+        - shell
+    script:
+        - docker exec $CONTAINER_NAME mkdir -p storage/framework/cache storage/framework/sessions storage/framework/views
+        - docker exec $CONTAINER_NAME chown -R www-data:www-data /var/www/html/storage
+    when: manual
